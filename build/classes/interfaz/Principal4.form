@@ -52,13 +52,6 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtContrasena">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="70" width="90" height="30"/>
-            </Constraint>
-          </Constraints>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Escribas su Contrase&#xf1;a: "/>
@@ -173,6 +166,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="txtResultado">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                   </Properties>
@@ -192,9 +186,19 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtLongitud">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtLongitudKeyTyped"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="90" y="70" width="40" height="30"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtPassContrase&#xf1;a">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="340" y="70" width="90" height="30"/>
             </Constraint>
           </Constraints>
         </Component>

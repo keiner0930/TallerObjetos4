@@ -13,20 +13,22 @@ import javax.swing.JOptionPane;
  * @author sony
  */
 public class Principal4 extends javax.swing.JFrame {
-int longitud;
- String contraseniaa;
- 
+
+    int longitud;
+    String contrasena;
+
     /**
      * Creates new form Principal4
      */
     public Principal4() {
         initComponents();
         txtLongitud.setText("8");
-        txtLongitud.requestFocusInWindow();
         txtLongitud.selectAll();
         cmdCambiar.setEnabled(false);
-            cmdMostrar.setEnabled(false);
-            
+        cmdMostrar.setEnabled(false);
+        cmdGuardar.setEnabled(true);
+        cmdLimpiar.setEnabled(true);
+
     }
 
     /**
@@ -40,7 +42,6 @@ int longitud;
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtContrasena = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         cmdGuardar = new javax.swing.JButton();
@@ -52,6 +53,7 @@ int longitud;
         txtResultado = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         txtLongitud = new javax.swing.JTextField();
+        txtPassContraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,7 +62,6 @@ int longitud;
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
         jLabel1.setText("Contraseña");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 120, -1));
-        jPanel1.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 90, 30));
 
         jLabel2.setText("Escribas su Contraseña: ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
@@ -105,6 +106,7 @@ int longitud;
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtResultado.setEditable(false);
         txtResultado.setColumns(20);
         txtResultado.setRows(5);
         jScrollPane1.setViewportView(txtResultado);
@@ -115,7 +117,14 @@ int longitud;
 
         jLabel3.setText("Longitud:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+
+        txtLongitud.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLongitudKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 40, 30));
+        jPanel1.add(txtPassContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,86 +141,107 @@ int longitud;
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
-     txtLongitud.setText("8");
-        txtContrasena.setText("");
+        txtLongitud.setText("8");
+        txtPassContraseña.setText("");
         txtResultado.setText("");
-        
+
         cmdGuardar.setEnabled(true);
         cmdCambiar.setEnabled(false);
         cmdMostrar.setEnabled(false);
-        cmdLimpiar.setEnabled(false);
-        txtContrasena.setEditable(true);
+        cmdLimpiar.setEnabled(true);
+        txtPassContraseña.setEditable(true);
 
         txtLongitud.requestFocusInWindow();
         txtLongitud.selectAll();
-    
-  
-        
-        
+
+
     }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
-    Password p, p1;
-        Password password2;
-            int longitud = 8;
-            String pass;
-            pass = txtContrasena.getText();
-            password2 = new Password(longitud, pass);
-            longitud = Integer.parseInt(txtLongitud.getText());
-            password2.setLongitud(longitud);
-            
-           if(txtLongitud.getText().trim().isEmpty()){
+        Password p;
+        Password clave2;
+        int longitud = 8;
+        String password;
+
+        password = txtPassContraseña.getText();
+        clave2 = new Password(longitud, password);
+        longitud = Integer.parseInt(txtLongitud.getText());
+        clave2.setLongitud(longitud);
+
+        if (txtLongitud.getText().trim().isEmpty()) {
+            getToolkit().beep();
             JOptionPane.showMessageDialog(this, "Digite la Longitud", "error", JOptionPane.ERROR_MESSAGE);
             txtLongitud.requestFocusInWindow();
-    }else  if (txtContrasena.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite Contraseña", "error", JOptionPane.ERROR_MESSAGE);
-            txtContrasena.requestFocusInWindow();
-        }else if (longitud != pass.length()) {
-                JOptionPane.showMessageDialog(this, "La contraseña no coincide con la longitud", "ERROR", JOptionPane.ERROR_MESSAGE); 
-        }else {
-            contraseniaa = txtContrasena.getText();
-            longitud = contraseniaa.length();
-            
-            p = new Password(longitud, contraseniaa);
-            JOptionPane.showMessageDialog(this, "Contraseña guardada");
-            
-            cmdCambiar.setEnabled(true);
+        } else if (txtPassContraseña.getText().trim().isEmpty()) {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(this, "Digite La Contraseña", "error", JOptionPane.ERROR_MESSAGE);
+            txtPassContraseña.requestFocusInWindow();
+        } else if (longitud != password.length()) {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(this, "La contraseña no coincide con la longitud", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtPassContraseña.requestFocusInWindow();
+
+        } else {
+            contrasena = txtPassContraseña.getText();
+            longitud = contrasena.length();
+
+            p = new Password(longitud, contrasena);
+            JOptionPane.showMessageDialog(this, "Contraseña guardada exitosamente");
+
+            cmdCambiar.setEnabled(false);
             cmdMostrar.setEnabled(true);
             cmdLimpiar.setEnabled(true);
             cmdGuardar.setEnabled(false);
-            txtContrasena.setEditable(false);
-             
-            
-            
+            txtPassContraseña.setEditable(false);
+
         }
-    
-        
+
+
     }//GEN-LAST:event_cmdGuardarActionPerformed
 
     private void cmdMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMostrarActionPerformed
-    Password pa, c,cla;
-    String contra;
-        contraseniaa = txtContrasena.getText();
-        longitud = contraseniaa.length();
-        pa = new Password(longitud, contraseniaa);
-        cla = new Password(longitud, contraseniaa);
-        contra = cla.fuerte();
-        c = pa.ver();
-        txtResultado.setText("Su contraseña es: " + c.getContrasena()+ "\n" + " longitud de su contraseña es: " + c.getLongitud()+"\n "+contra);
-  
+        Password p, res, c ;
+        String seg;
+        
+        contrasena = txtPassContraseña.getText();
+        longitud = contrasena.length();
+        p = new Password(longitud, contrasena);
+        c = new Password(longitud, contrasena);
+        
+        seg = c.seguridad();
+        res = p.ver();
+        txtResultado.setText("Su contraseña es :" + c.getContrasena()
+                + "\nLa longitud es de :" + c.getLongitud() 
+                + "\n" + seg);
+
+        cmdCambiar.setEnabled(true);
+        cmdMostrar.setEnabled(true);
+        cmdLimpiar.setEnabled(true);
+        cmdGuardar.setEnabled(false);
+     
+
     }//GEN-LAST:event_cmdMostrarActionPerformed
 
     private void cmdCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCambiarActionPerformed
-     txtLongitud.setEditable(false);
-       cmdGuardar.setEnabled(true);
-       txtContrasena.setEditable(true);
-        txtContrasena.selectAll();
-        txtContrasena.requestFocusInWindow();
+       
+        txtLongitud.setEditable(true);
+        cmdGuardar.setEnabled(true);
+        txtPassContraseña.setEditable(true);
+        txtPassContraseña.selectAll();
+        txtPassContraseña.requestFocusInWindow();
         cmdMostrar.setEnabled(false);
         cmdCambiar.setEnabled(false);
         txtResultado.setText("");
-    
+
     }//GEN-LAST:event_cmdCambiarActionPerformed
+
+    private void txtLongitudKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLongitudKeyTyped
+     char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtLongitudKeyTyped
 
     /**
      * @param args the command line arguments
@@ -260,8 +290,8 @@ int longitud;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtContrasena;
     private javax.swing.JTextField txtLongitud;
+    private javax.swing.JPasswordField txtPassContraseña;
     private javax.swing.JTextArea txtResultado;
     // End of variables declaration//GEN-END:variables
 }

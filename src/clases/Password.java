@@ -10,21 +10,22 @@ package clases;
  * @author sony
  */
 public class Password {
-   private int longitud;
-    private String contrasenia;
-    private String contraseniaa;
-    public Password(int longitud,String contrasenia ){
-        this.longitud=longitud;
-        this.contrasenia=contrasenia;
-    
-}
+
+    private int longitud;
+    private String contrasena;
+
+    public Password(int longitud, String contrasena) {
+        this.longitud = longitud;
+        this.contrasena = contrasena;
+
+    }
 
     public int getLongitud() {
         return longitud;
     }
 
     public String getContrasena() {
-        return contraseniaa;
+        return contrasena;
     }
 
     public void setLongitud(int longitud) {
@@ -32,40 +33,39 @@ public class Password {
     }
 
     public void setContrasena(String contrasena) {
-        this.contraseniaa = contrasena;
+        this.contrasena = contrasena;
     }
-    
-    public String fuerte(){
-        String fuerte;
-        
-        if (this.longitud>=6) {
-         fuerte="La contraseña suya  es fuerte";
-        }else{
-            fuerte="la contraseña es debil";
+
+    public String seguridad() {
+        String seguridad;
+
+        if (this.longitud >= 6) {
+            seguridad = "Su contraseña es fuerte";
+        } else {
+            seguridad = "Su contraseña es debil";
         }
-        
-        return fuerte;
+        return seguridad;
     }
-    
-    public Password cambiar_contraseña(){
-        int longi;
+
+    public Password cambiar() {
+        int lon;
         String clave;
-        Password nueva_contrasena;
-        
-         longi = this.longitud;
-        clave = this.contraseniaa;
-        
-        nueva_contrasena = new Password(longi,clave);
-        return nueva_contrasena;
+        Password nueva;
+
+        lon = this.longitud;
+        clave = this.contrasena;
+
+        nueva = new Password(lon, clave);
+        return nueva;
     }
-    
-     public Password ver(){
+
+    public Password ver() {
         Password pass;
-       String clave;
-       int longitu;
-       clave=this.contraseniaa;
-       longitu=this.longitud;
-       pass=new Password(longitu,clave);
-       return pass;
+        String clave;
+        int longitu;
+        clave = this.contrasena;
+        longitu = this.longitud;
+        pass = new Password(longitu, clave);
+        return pass;
     }
 }
